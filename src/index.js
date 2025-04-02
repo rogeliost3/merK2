@@ -1,11 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/router.js";
-import {testConnection} from "./config/mysql2.js";
-
-
+import { testConnection } from "./config/mysql.js";
 dotenv.config();
-
+testConnection();
 const APP_PORT = process.env.APP_PORT;
 const app = express();
 
@@ -18,7 +16,6 @@ app.set('view engine', 'pug');
 
 
 app.use("/",router);
-testConnection();
 
 
 app.listen(APP_PORT,()=>{

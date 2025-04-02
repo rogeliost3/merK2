@@ -1,53 +1,47 @@
-import standModel from "../models/stands.js"; // default
+import standModel from "../models/stand.js";
 
-async function getAll(req, res) {
-
-    // obtenemos los stands en forma de array
+async function getAll(req,res){
+    //res.send("Conseguir todos los stands");
     const stands = await standModel.getAll();
-
-    // pedimos que la respuesta se haga en formato json
-    res.json(stands);
-
-    //res.render("stand/list");
+    console.log(stands);
+    //res.json(stands)
+    res.render("stand/list",{stands});
 }
 
-async function getByID(req, res) {
+async function getByID(req,res){
     const id = req.params.id;
+    //const {id} = req.params;
+    //res.send("Conseguir el stand "+id);
     const stand = await standModel.getByID(id);
     res.json(stand);
     //res.render("stand/show",{standId:id});
 }
 
-function createForm(req, res) {
+function createForm(req,res){
     res.render("stand/create");
 }
-
-async function create(req, res) {
+async function create(req,res){
     //res.send("Creamos un stand");
-    const { name, size } = req.body;
-
-    const category = 1, //temporalmente
-    creation_date = new Date(); //hoy
-    const response = await standModel.create(name, size, creation_date, category);
-    
-    // const name = req.body.name;
-    // const size = req.body.size;
-    console.log("name", name, "size", size);
-    res.redirect("/stand");
+    const {name,size} = req.body;
+    const category  = 1;
+    const creation_date = new Date();
+    const response = await standModel.create(name,size,creation_date,category);
+    res.json(response);
+    //res.redirect("/stand");
 }
 
-function edit(req, res) {
+function edit(req,res){
     const id = req.params.id;
     const datos = req.body; // los datos para modificar el stand
-    res.send("Modificamos el stand " + id);
+    res.send("Modificamos el stand "+ id);
 }
 
-function remove(req, res) {
+function remove(req,res){
     const id = req.params.id;
-    res.send("Borramos el stand " + id);
+    res.send("Borramos el stand "+ id);
 }
 
-export {
+export{
     getAll,
     getByID,
     createForm,

@@ -207,7 +207,7 @@ actualizamos los pug de cada cosa
 
 abrir edit.pug por ejemplo:
 extends ../layout
-block content  
+block content
     h1 Stands
     secton(class="stand-list")
         if stands
@@ -216,3 +216,7 @@ block content
                     include standCard
         else
             there is no stand for that id
+crear una funcion mas en el controlador que nos devuelva la vista 
+para editar cada cosa, (stands, etc)
+
+

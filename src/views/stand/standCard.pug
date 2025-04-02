@@ -1,6 +1,6 @@
 article 
     h2(class="stand-card")= stand.name 
-    p(class="stand-card__creation-date")=stand.creation_date
-    ...
-
-    form (action="/stand/")
+    p(class="stand-card__size")= stand.size 
+    p(class="stand-card__creation-date")= stand.creation_date
+    p(class="stand-card__category")= stand.category_id 
+    
