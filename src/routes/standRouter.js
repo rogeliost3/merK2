@@ -11,6 +11,7 @@ router.post("/",standController.create)
 // conseguir stand por id
 router.get("/:id",standController.getByID)
 // modificar un stand
+router.get("/:id/edit",standController.editForm)
 router.post("/:id",standController.edit)
 
 // ruta para eliminar un stand
