@@ -13,9 +13,10 @@ async function getByID(id){
     const query = `SELECT * FROM ${TABLE} WHERE stand_id=?`;
     const connection = await getConnection();
     const [results,_] = await connection.query(query,[id]);
-    console.table(results);
+    //console.table(results);
+    const result = results.length > 0 ? results[0]: null;
     connection.end();
-    return results;
+    return result;
 }
 
 async function create(name,size,creation_date,category_id){

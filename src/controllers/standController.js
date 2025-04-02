@@ -13,8 +13,8 @@ async function getByID(req,res){
     //const {id} = req.params;
     //res.send("Conseguir el stand "+id);
     const stand = await standModel.getByID(id);
-    res.json(stand);
-    //res.render("stand/show",{standId:id});
+    //res.json(stand);
+    res.render("stand/show",{stand});
 }
 
 function createForm(req,res){
@@ -26,19 +26,28 @@ async function create(req,res){
     const category  = 1;
     const creation_date = new Date();
     const response = await standModel.create(name,size,creation_date,category);
-    res.json(response);
-    //res.redirect("/stand");
+    //res.json(response);
+    res.redirect("/stand");
+}
+async function editForm(req,res){
+    const id = req.params.id;
+    const stand = await standModel.getByID(id);
+    if(!stand){
+        res.redirect("/stand")
+    }
+    res.render("stand/edit",{stand});
+}
+async function edit(req,res){
+    const id = req.params.id;
+    const {name,size,creation_date,category_id} = req.body; // los datos para modificar el stand
+    const result = await standModel.update(id,name,size,creation_date,category_id)
+    res.redirect("/stand/"+id);
 }
 
-function edit(req,res){
+async function remove(req,res){
     const id = req.params.id;
-    const datos = req.body; // los datos para modificar el stand
-    res.send("Modificamos el stand "+ id);
-}
-
-function remove(req,res){
-    const id = req.params.id;
-    res.send("Borramos el stand "+ id);
+    const response  = await standModel.remove(id);
+    res.redirect("/stand");
 }
 
 export{
@@ -55,6 +64,7 @@ export default {
     getByID,
     createForm,
     create,
+    editForm,
     edit,
     remove
 };
