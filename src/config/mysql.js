@@ -15,6 +15,7 @@ async function testConnection() {
     try {
         const connection = await getConnection();
         console.log("Conexión correcta");
+        connection.end();
     } catch (e) {
         console.error("Error de conexion",e)
     }
