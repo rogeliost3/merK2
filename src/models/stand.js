@@ -49,4 +49,12 @@ async function pruebas(){
     await update(7,"no stand aqui","medium","2025/03/05",1)
     await getAll();
 }
-pruebas();
+
+
+export default {
+    getAll,
+    getByID,
+    create,
+    update,
+    remove
+}

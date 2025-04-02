@@ -1,25 +1,33 @@
+import standModel from "../models/stand.js";
 
-function getAll(req,res){
+async function getAll(req,res){
     //res.send("Conseguir todos los stands");
-    res.render("stand/list");
+    const stands = await standModel.getAll();
+    console.log(stands);
+    //res.json(stands)
+    res.render("stand/list",{stands});
 }
 
-function getByID(req,res){
+async function getByID(req,res){
     const id = req.params.id;
+    //const {id} = req.params;
     //res.send("Conseguir el stand "+id);
-    res.render("stand/show",{standId:id});
+    const stand = await standModel.getByID(id);
+    res.json(stand);
+    //res.render("stand/show",{standId:id});
 }
 
 function createForm(req,res){
     res.render("stand/create");
 }
-function create(req,res){
+async function create(req,res){
     //res.send("Creamos un stand");
     const {name,size} = req.body;
-    // const name = req.body.name;
-    // const size = req.body.size;
-    console.log("name",name,"size",size);
-    res.redirect("/stand");
+    const category  = 1;
+    const creation_date = new Date();
+    const response = await standModel.create(name,size,creation_date,category);
+    res.json(response);
+    //res.redirect("/stand");
 }
 
 function edit(req,res){

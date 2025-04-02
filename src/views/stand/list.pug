@@ -2,8 +2,7 @@ extends ../layout
 
 block content 
     h1 Stands 
-    ul 
-        li Stand 1
-        li Stand 2
-        li Stand 3
+    section(class="stand-list")
+        each stand in stands 
+            include standCard
         
